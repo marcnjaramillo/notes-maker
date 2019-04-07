@@ -5,12 +5,12 @@ import { createBrowserHistory } from 'history';
 
 import Login from '../ui/Login';
 import Signup from '../ui/Signup';
-import Link from '../ui/Link';
+import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 
 const history = createBrowserHistory();
 const unauthenticatedPages = ['/', '/signup'];
-const authenticatedPages = ['/links'];
+const authenticatedPages = ['/dashboard'];
 
 export const onAuthChange = (isAuthenticated) => {
   const pathname = history.location.pathname;
@@ -18,7 +18,7 @@ export const onAuthChange = (isAuthenticated) => {
   const isAuthenticatedPage = authenticatedPages.includes(pathname);
 
   if (isUnauthenticatedPage && isAuthenticated) {
-    history.replace('/links')
+    history.replace('/dashboard')
   } else if (isAuthenticatedPage && !isAuthenticated) {
     history.replace('/');
   }
@@ -29,7 +29,7 @@ export const routes = (
     <Switch>
       <Route exact path="/" component={Login} />
       <Route exact path="/signup" component={Signup} />
-      <Route exact path="/links" component={Link} />
+      <Route exact path="/dashboard" component={Dashboard} />
       <Route path="*" component={NotFound} />
     </Switch>
   </Router>

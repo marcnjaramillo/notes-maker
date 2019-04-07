@@ -21,3 +21,5 @@ react-meteor-data       # React higher-order component for reactively tracking M
 meteortesting:mocha
 jquery
 accounts-base
+fourseven:scss
+accounts-password

@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "history": "^4.9.0",
     "jest": "^24.7.1",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "react": "^16.5.0",
+    "react-addons-pure-render-mixin": "^15.6.2",
     "react-dom": "^16.5.0",
+    "react-router-dom": "^5.0.0",
     "simpl-schema": "^1.5.5"
   },
   "meteor": {
@@ -24,5 +28,8 @@
     },
     "testModule": "tests/main.js"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "sinon": "^7.3.1"
+  }
 }

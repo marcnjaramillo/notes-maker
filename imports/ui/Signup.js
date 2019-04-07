@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 
 
-class Signup extends Component {
+export class Signup extends Component {
   state = {
     error: ''
   };
 
   componentWillMount() {
     if (Meteor.userId()) {
-      this.props.history.replace('/links');
+      this.props.history.replace('/dashboard');
     }
   };
 
@@ -25,7 +27,7 @@ class Signup extends Component {
       return this.setState({error: 'Password must be more than 8 characters in length.'})
     }
 
-    Accounts.createUser({email, password}, (err) => {
+    this.props.createUser({email, password}, (err) => {
       if (err) {
         this.setState({error: err.reason});
       } else {
@@ -52,4 +54,12 @@ class Signup extends Component {
   }
 };
 
-export default Signup;
+Signup.PropTypes = {
+  createUser: PropTypes.func.isRequired
+};
+
+export default withTracker(() => {
+  return {
+    createUser: Accounts.createUser
+  };
+})(Signup);

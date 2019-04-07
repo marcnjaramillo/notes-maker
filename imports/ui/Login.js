@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 
-class Login extends Component {
+export class Login extends Component {
   state = {
     error: ''
   };
@@ -11,7 +13,7 @@ class Login extends Component {
     if (!Meteor.userId()) {
       this.props.history.replace('/');
     } else {
-      this.props.history.replace('/links');
+      this.props.history.replace('/dashboard');
     }
   };
 
@@ -21,7 +23,7 @@ class Login extends Component {
     let email = this.refs.email.value.trim();
     let password = this.refs.password.value.trim();
 
-    Meteor.loginWithPassword({email}, password, (err) => {
+    this.props.loginWithPassword({email}, password, (err) => {
       if (err) {
         this.setState({error: 'Email and password do not match any user account.'});
       } else {
@@ -34,7 +36,7 @@ class Login extends Component {
     return (
       <div className="boxed-view">
         <div className="boxed-view__box">
-          <h1>Short Lnk</h1>
+          <h1>Notes Maker</h1>
           {this.state.error ? <p>{this.state.error}</p> : undefined}
           <form onSubmit={this.onSubmit} noValidate className="boxed-view__form">
             <input type="email" ref="email" name="email" placeholder="Email" />
@@ -48,4 +50,12 @@ class Login extends Component {
   }
 };
 
-export default Login;
+Login.propTypes = {
+  loginWithPassword: PropTypes.func.isRequired
+}
+
+export default withTracker(() => {
+  return {
+    loginWithPassword: Meteor.loginWithPassword
+  };
+})(Login);
