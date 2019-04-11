@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import assert from 'assert';
-import { configure, mount, shallow } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
 
