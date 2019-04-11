@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PrivateHeader from './PrivateHeader';
+import NoteList from './NoteList';
 
 const Dashboard = () => {
 
@@ -8,7 +9,7 @@ const Dashboard = () => {
     <div>
       <PrivateHeader title="Notes Maker" />
       <div className="wrapper">
-        Dashboard page
+        <NoteList/>
       </div>
     </div>
   )

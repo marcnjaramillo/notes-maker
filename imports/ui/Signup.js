@@ -54,7 +54,7 @@ export class Signup extends Component {
   }
 };
 
-Signup.PropTypes = {
+Signup.propTypes = {
   createUser: PropTypes.func.isRequired
 };
 
