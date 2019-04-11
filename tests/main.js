@@ -8,6 +8,7 @@ import './ui/Login.test.js';
 import './ui/Signup.test.js';
 import './ui/NoteListItem.test.js';
 import './ui/NoteListHeader.test.js';
+import './ui/NoteList.test.js';
 // describe('notes-maker', function () {
 //   it('package.json has correct name', async function () {
 //     const { name } = await import('../package.json');
