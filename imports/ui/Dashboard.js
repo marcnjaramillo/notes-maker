@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import PrivateHeader from './PrivateHeader';
 import NoteList from './NoteList';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+
+  useEffect(() => {
+    if (!Meteor.userId()) {
+      props.history.replace('/');
+    }
+  });
 
   return (
     <div>

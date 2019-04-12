@@ -8,9 +8,10 @@ import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 
-const history = createBrowserHistory();
 const unauthenticatedPages = ['/', '/signup'];
 const authenticatedPages = ['/dashboard'];
+
+export const history = createBrowserHistory();
 
 export const onAuthChange = (isAuthenticated) => {
   const pathname = history.location.pathname;
@@ -30,6 +31,7 @@ export const routes = (
       <Route exact path="/" component={Login} />
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/dashboard/:id" component={Dashboard} />
       <Route path="*" component={NotFound} />
     </Switch>
   </Router>

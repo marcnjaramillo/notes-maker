@@ -10,9 +10,7 @@ export class Login extends Component {
   };
 
   componentWillMount() {
-    if (!Meteor.userId()) {
-      this.props.history.replace('/');
-    } else {
+    if (Meteor.userId()) {
       this.props.history.replace('/dashboard');
     }
   };

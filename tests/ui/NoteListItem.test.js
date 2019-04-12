@@ -1,31 +1,46 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import assert from 'assert';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import sinon from 'sinon';
 
-import NoteListItem from './../../imports/ui/NoteListItem';
+import { notes } from './../../fixtures/fixtures';
+import { NoteListItem } from './../../imports/ui/NoteListItem';
 
 configure({ adapter: new Adapter() });
 
 if (Meteor.isClient) {
   describe('NoteListItem', function () {
-    it('should render title and timestamp', function () {
-      const title = 'Test title';
-      const updatedAt = 1554864669173;
-      const wrapper = mount( <NoteListItem note={{title, updatedAt}}/> );
 
-      assert.strictEqual(wrapper.find('h5').text(), title);
+    let Session;
+
+    beforeEach(() => {
+      Session = {
+        set: sinon.spy()
+      };
+    });
+
+    it('should render title and timestamp', function () {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> );
+
+      assert.strictEqual(wrapper.find('h5').text(), notes[0].title);
       assert.strictEqual(wrapper.find('p').text(), '4/09/19');
     });
 
     it('should render default title if no title', function () {
-      const title = '';
-      const updatedAt = 1554864669173;
-      const wrapper = mount( <NoteListItem note={{title, updatedAt}}/> );
+      const wrapper = mount( <NoteListItem note={notes[1]} Session={Session}/> );
 
       assert.strictEqual(wrapper.find('h5').text(), 'Untitled note');
       assert.strictEqual(wrapper.find('p').text(), '4/09/19');
-    })
+    });
+
+    it('should call set on click', function () {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> );
+
+      wrapper.find('div').simulate('click');
+      assert(Session.set.calledWith('selectedNoteId', notes[0]._id))
+    });
   });
 }
