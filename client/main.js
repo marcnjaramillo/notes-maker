@@ -1,17 +1,13 @@
-import { Meteor } from 'meteor/meteor';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 
-import { routes, history, onAuthChange } from '../imports/routes/routes';
+import { AppRouter, history } from '../imports/routes/AppRouter';
 import '../imports/startup/simple-schema-configuration';
 
 // import './main.html';
-
-Tracker.autorun(() => {
-  const isAuthenticated = !!Meteor.userId();
-  onAuthChange(isAuthenticated);
-});
 
 Tracker.autorun(() => {
   const selectedNoteId = Session.get('selectedNoteId');
@@ -24,7 +20,7 @@ Tracker.autorun(() => {
 Meteor.startup(() => {
   Session.set('selectedNoteId', undefined);
   ReactDOM.render(
-    routes,
+    <AppRouter />,
     document.getElementById("app")
   )
 });
