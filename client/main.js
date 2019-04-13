@@ -7,8 +7,6 @@ import { Session } from 'meteor/session';
 import { AppRouter, history } from '../imports/routes/AppRouter';
 import '../imports/startup/simple-schema-configuration';
 
-// import './main.html';
-
 Tracker.autorun(() => {
   const selectedNoteId = Session.get('selectedNoteId');
 
