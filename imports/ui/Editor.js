@@ -53,8 +53,8 @@ export class Editor extends Component {
     if (this.props.note) {
       return (
         <div>
-          <input value={this.props.note.title} placeholder="Untitled note" onChange={this.handleTitleChange}/>
-          <textarea value={this.props.note.body} placeholder="Create your note here" onChange={this.handleBodyChange}></textarea>
+          <input value={this.state.title} placeholder="Untitled note" onChange={this.handleTitleChange}/>
+          <textarea value={this.state.body} placeholder="Create your note here" onChange={this.handleBodyChange}></textarea>
           <button onClick={this.handleRemoval}>Delete Note</button>
         </div>
       )
