@@ -1,21 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
 
 import PrivateHeader from './PrivateHeader';
 import NoteList from './NoteList';
+import Editor from './Editor';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
-  useEffect(() => {
-    if (!Meteor.userId()) {
-      props.history.replace('/');
-    }
-  });
+
+  // componentDidMount() {
+  //   if (!Meteor.userId()) {
+  //     this.props.history.replace('/');
+  //   }
+  // };
 
   return (
     <div>
       <PrivateHeader title="Notes Maker" />
       <div className="wrapper">
         <NoteList/>
+        <Editor/>
       </div>
     </div>
   )
