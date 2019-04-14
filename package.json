@@ -28,6 +28,9 @@
     },
     "testModule": "tests/main.js"
   },
+  "engines": {
+    "node": "8.11.4"
+  },
   "devDependencies": {
     "enzyme": "^3.9.0",
     "sinon": "^7.3.1"
