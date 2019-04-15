@@ -52,14 +52,18 @@ export class Editor extends Component {
   render() {
     if (this.props.note) {
       return (
-        <div>
+        <div className="editor">
           <input value={this.state.title} placeholder="Untitled note" onChange={this.handleTitleChange}/>
           <textarea value={this.state.body} placeholder="Create your note here" onChange={this.handleBodyChange}></textarea>
           <button onClick={this.handleRemoval}>Delete Note</button>
         </div>
       )
     } else {
-       return <p>{this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}</p>
+      return (      
+        <div className="editor">
+          <p>{this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}</p>
+        </div>
+      )
     }
   };
 };
