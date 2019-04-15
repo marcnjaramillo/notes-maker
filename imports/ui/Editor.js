@@ -14,27 +14,22 @@ export class Editor extends Component {
     body: ''
   }
 
-  handleBodyChange = (e) => {
-    const body = e.target.value;
-    this.setState({ body });
-    this.props.call('notes.update', this.props.note._id, { body });
-  };
-
   handleTitleChange = (e) => {
     const title = e.target.value;
     this.setState({ title });
     this.props.call('notes.update', this.props.note._id, { title });
   };
 
+  handleBodyChange = (e) => {
+    const body = e.target.value;
+    this.setState({ body });
+    this.props.call('notes.update', this.props.note._id, { body });
+  };
+
   handleRemoval = () => {
     this.props.call('notes.remove', this.props.note._id);
     this.props.history.push('/dashboard');
-  };
-
-  componentDidMount() {
-    if (this.props.match) {
-      this.props.Session.set('selectedNoteId', this.props.match.params.id)
-    }
+    this.props.Session.set('selectedNoteId', '');
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,19 +44,27 @@ export class Editor extends Component {
     }
   };
 
+  componentDidMount() {
+    if (this.props.match) {
+      this.props.Session.set('selectedNoteId', this.props.match.params.id)
+    }
+  };
+
   render() {
     if (this.props.note) {
       return (
         <div className="editor">
-          <input value={this.state.title} placeholder="Untitled note" onChange={this.handleTitleChange}/>
-          <textarea value={this.state.body} placeholder="Create your note here" onChange={this.handleBodyChange}></textarea>
-          <button onClick={this.handleRemoval}>Delete Note</button>
+          <input className="editor__title" value={this.state.title} placeholder="Untitled note" onChange={this.handleTitleChange}/>
+          <textarea className="editor__body" value={this.state.body} placeholder="Create your note here" onChange={this.handleBodyChange}></textarea>
+          <div>
+            <button className="button button--secondary" onClick={this.handleRemoval}>Delete Note</button>
+          </div>
         </div>
       )
     } else {
       return (      
         <div className="editor">
-          <p>{this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}</p>
+          <p className="editor__message">{this.props.selectedNoteId ? 'Note not found.' : 'Pick or create a note to get started.'}</p>
         </div>
       )
     }
