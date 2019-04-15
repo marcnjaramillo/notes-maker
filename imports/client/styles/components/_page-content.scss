@@ -10,9 +10,15 @@
 }
 
 .page-content__sidebar {
-  display: none;
-  width: $sidebar-width;
-  padding-right: $large-space;
+  display: flex;
+  transition: left .3s ease;
+  width: 100vw;
+
+  position: fixed;
+  top: $header-height;
+  left: -100vw;
+  bottom: 0;
+  z-index: 1;
 
   @include desktop {
     display: flex;
